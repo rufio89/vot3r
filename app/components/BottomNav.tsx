@@ -4,11 +4,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaHome, FaFilm, FaUser } from 'react-icons/fa'; // Make sure to install react-icons
 
-const BottomNav = () => {
+interface BottomNavProps {
+  className?: string;
+}
+
+const BottomNav: React.FC<BottomNavProps> = ({ className }) => {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 pb-safe md:hidden">
+    <nav className={className}>
       <div className="flex justify-around">
         <Link href="/" className={`pt-2 pb-1 text-center ${pathname === '/' ? 'text-primary' : 'text-gray-500'}`}>
           <FaHome className="h-6 w-6 mb-1 mx-auto" />

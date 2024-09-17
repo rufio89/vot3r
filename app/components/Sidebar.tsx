@@ -3,7 +3,11 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { FaHome, FaFilm, FaUser } from 'react-icons/fa';
 
-const Sidebar = () => {
+interface SidebarProps {
+  className?: string;
+}
+
+function Sidebar({ className }: SidebarProps) {
   const pathname = usePathname();
 
   const navItems = [
@@ -13,7 +17,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <nav className="hidden md:flex flex-col bg-white border-r border-gray-200 w-48 h-screen fixed left-0 top-0 z-10">
+    <nav className={`hidden md:flex flex-col bg-white border-r border-gray-200 w-48 h-screen fixed left-0 top-0 z-10 ${className}`}>
       {navItems.map((item) => (
         <Link
           key={item.href}
@@ -28,6 +32,6 @@ const Sidebar = () => {
       ))}
     </nav>
   );
-};
+}
 
 export default Sidebar;

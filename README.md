@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Movie Night Voting App
+
+## Description
+Movie Night Voting App is a web application that allows users to create and manage movie nights, add movies to their personal lists, and vote on movies for group viewing sessions. It's perfect for friends, families, or any group looking to democratically decide on their next movie night selection.
+
+## Features
+- User authentication
+- Create and manage movie nights
+- Search and add movies to personal lists
+- Vote on movies for specific movie nights
+- Real-time vote tracking
+- Countdown timer to movie night events
+- Invite friends to movie nights
+- Responsive design for mobile and desktop use
+
+## Technologies Used
+- Next.js
+- React
+- TypeScript
+- Firebase (Authentication, Firestore)
+- Tailwind CSS
+- OMDB API for movie data
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js (v14 or later)
+- npm or yarn
+- Firebase account
+- OMDB API key
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Installation
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/movie-night-voting-app.git
+   cd movie-night-voting-app
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+   ```
+   npm install
+   ```
+   or
+   ```
+   yarn install
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+   Create a `.env.local` file in the root directory and add the following:
+   ```
+   NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_firebase_auth_domain
+   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_firebase_project_id
+   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_firebase_storage_bucket
+   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_firebase_messaging_sender_id
+   NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+   NEXT_PUBLIC_OMDB_API_KEY=your_omdb_api_key
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+   ```
+   npm run dev
+   ```
+   or
+   ```
+   yarn dev
+   ```
 
-## Learn More
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
+1. Sign up or log in to your account
+2. Create a new movie night or join an existing one
+3. Search for movies and add them to your list
+4. Vote on movies for upcoming movie nights
+5. Invite friends to join your movie night
+6. Watch the countdown and prepare for your movie night!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
+This project is licensed under the [MIT License](LICENSE).
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Acknowledgements
+- [Next.js Documentation](https://nextjs.org/docs)
+- [React Documentation](https://reactjs.org/docs/getting-started.html)
+- [Firebase Documentation](https://firebase.google.com/docs)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [OMDB API](http://www.omdbapi.com/)

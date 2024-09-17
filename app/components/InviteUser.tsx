@@ -19,7 +19,7 @@ const InviteUser: React.FC<InviteUserProps> = ({ movieNightId }) => {
 
     try {
       const inviteCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-      const inviteRef = await addDoc(collection(db, 'invitations'), {
+      await addDoc(collection(db, 'invitations'), {
         movieNightId,
         createdBy: user.uid,
         createdAt: new Date(),

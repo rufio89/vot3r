@@ -1,5 +1,3 @@
-import { signOut } from 'firebase/auth';
-import { auth } from '../firebase/clientApp';
 import { useMovieNight } from '../context/MovieNightContext';
 import MovieNightList from './MovieNightList';
 import MovieNightDetails from './MovieNightDetails';

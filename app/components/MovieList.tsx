@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { Movie, MovieNight } from '../types/MovieTypes';
 import MovieNightUsers from './MovieNightUsers';
-import Countdown from './Countdown';
 import { Timestamp } from 'firebase/firestore';
 import { fetchMovieNightDetails, fetchMoviesForMovieNight, voteForMovie, removeMovieFromNight } from '../firebase/firebaseService';
 
@@ -88,11 +87,6 @@ const MovieList: React.FC<MovieListProps> = ({ movieNightId }) => {
 
   const hasUserVoted = (movieId: string) => {
     return movieNight?.votes[user?.uid || ''] === movieId;
-  };
-
-  const formatDateTime = (dateTime: Date | null) => {
-    if (!dateTime) return 'Not set';
-    return dateTime.toLocaleString();
   };
 
   return (

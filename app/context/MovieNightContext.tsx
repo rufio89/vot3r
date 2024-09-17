@@ -19,7 +19,7 @@ const MovieNightContext = createContext<MovieNightContextType | undefined>(undef
 export const MovieNightProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [userMovieNights, setUserMovieNights] = useState<MovieNight[]>([]);
   const [selectedMovieNight, setSelectedMovieNight] = useState<string | null>(null);
-  const [movieNight, setMovieNight] = useState<MovieNight | null>(null);
+  const [movieNight] = useState<MovieNight | null>(null);
   const { user } = useAuth();
 
   useEffect(() => {

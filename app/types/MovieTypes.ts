@@ -25,3 +25,10 @@ export interface MovieNight {
 export interface UserMovie extends Movie {
   // Add any additional fields specific to UserMovie if needed
 }
+
+export interface MovieSearchResult {
+  imdbID: string;
+  Title: string;
+  Year: string;
+  Poster: string;
+}

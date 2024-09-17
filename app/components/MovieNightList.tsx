@@ -38,7 +38,7 @@ export default function MovieNightList() {
             ))}
           </div>
         ) : (
-          <p className="text-gray-600">You haven't created or joined any movie nights yet.</p>
+          <p className="text-gray-600">You aven&apos;t created or joined any movie nights yet.</p>
         )}
       </section>
       

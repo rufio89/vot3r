@@ -2,14 +2,21 @@ import React, { useState } from 'react';
 import { addDoc, collection, updateDoc, doc, arrayUnion } from 'firebase/firestore';
 import { db } from '../firebase/clientApp';
 import { useAuth } from '../context/AuthContext';
+import { MovieSearchResult } from '../types/MovieTypes';
 
 interface AddMovieToNightProps {
   movieNightId: string;
 }
 
+
+interface MovieDetails extends MovieSearchResult {
+  Plot: string;
+  imdbRating: string;
+}
+
 const AddMovieToNight: React.FC<AddMovieToNightProps> = ({ movieNightId }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<MovieSearchResult[]>([]);
   const { user } = useAuth();
 
   const searchMovies = async () => {
@@ -27,14 +34,14 @@ const AddMovieToNight: React.FC<AddMovieToNightProps> = ({ movieNightId }) => {
     }
   };
 
-  const fetchMovieDetails = async (imdbID: string) => {
+  const fetchMovieDetails = async (imdbID: string): Promise<MovieDetails> => {
     const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY;
     const response = await fetch(`http://www.omdbapi.com/?i=${imdbID}&plot=short&apikey=${apiKey}`);
     const data = await response.json();
     return data;
   };
 
-  const handleAddMovie = async (movie: any) => {
+  const handleAddMovie = async (movie: MovieSearchResult) => {
     if (!user) {
       alert('You must be logged in to add a movie');
       return;

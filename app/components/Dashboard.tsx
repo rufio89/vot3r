@@ -1,4 +1,3 @@
-import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase/clientApp';
 import { useMovieNight } from '../context/MovieNightContext';
@@ -6,16 +5,7 @@ import MovieNightList from './MovieNightList';
 import MovieNightDetails from './MovieNightDetails';
 
 export default function Dashboard() {
-  const router = useRouter();
   const { selectedMovieNight } = useMovieNight();
-
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
 
   return (
     <div className="max-w-7xl mx-auto">

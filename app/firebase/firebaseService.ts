@@ -1,4 +1,4 @@
-import { collection, query, where, getDocs, doc, getDoc, addDoc, updateDoc, deleteDoc, arrayUnion, arrayRemove, Timestamp, onSnapshot, runTransaction } from 'firebase/firestore';
+import { collection, query, where, getDocs, doc, getDoc, updateDoc, deleteDoc, arrayUnion, arrayRemove, onSnapshot, runTransaction } from 'firebase/firestore';
 import { db } from './clientApp';
 import { Movie, MovieNight } from '../types/MovieTypes';
 import { User } from '../types/UserTypes';

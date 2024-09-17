@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebase/clientApp';
 import { useAuth } from '../context/AuthContext';
-import { Movie } from "../types/MovieTypes";
+import { Movie, MovieSearchResult } from "../types/MovieTypes";
 
 interface AddMovieProps {
   onMovieAdded: (newMovie: Movie) => void;
@@ -10,7 +10,7 @@ interface AddMovieProps {
 
 const AddMovie: React.FC<AddMovieProps> = ({ onMovieAdded }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<MovieSearchResult[]>([]);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const AddMovie: React.FC<AddMovieProps> = ({ onMovieAdded }) => {
     }
   };
 
-  const handleAddMovie = async (movie: any) => {
+  const handleAddMovie = async (movie: MovieSearchResult) => {
     if (!user) {
       alert('You must be logged in to add a movie');
       return;

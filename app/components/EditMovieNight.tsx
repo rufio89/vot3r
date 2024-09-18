@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { doc, updateDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase/clientApp';
 import { MovieNight } from '../types/MovieTypes';
+import { formatDateTime, formatDateTimeForInput } from '../utils/dateUtils';
 
 interface EditMovieNightProps {
   movieNight: MovieNight;
@@ -10,20 +11,29 @@ interface EditMovieNightProps {
 
 const EditMovieNight: React.FC<EditMovieNightProps> = ({ movieNight, onUpdate }) => {
   const [name, setName] = useState(movieNight.name);
-  const [dateTime, setDateTime] = useState(movieNight.dateTime ? movieNight.dateTime.toDate().toISOString().slice(0, 16) : '');
+  const [dateTime, setDateTime] = useState(movieNight.dateTime ? formatDateTimeForInput(movieNight.dateTime) : '');
+
+  useEffect(() => {
+    if (movieNight.dateTime instanceof Timestamp) {
+      const date = formatDateTimeForInput(movieNight.dateTime);
+      console.log(date);
+      setDateTime(date);
+    }
+  }, [movieNight.dateTime]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const movieNightRef = doc(db, 'movieNights', movieNight.id);
+      const updatedDateTime = dateTime ? Timestamp.fromDate(new Date(dateTime)) : null;
       const updatedMovieNight: MovieNight = {
         ...movieNight,
         name,
-        dateTime: dateTime ? Timestamp.fromDate(new Date(dateTime)) : null
+        dateTime: updatedDateTime
       };
       await updateDoc(movieNightRef, {
         name,
-        dateTime: updatedMovieNight.dateTime
+        dateTime: updatedDateTime
       });
       onUpdate(updatedMovieNight);
     } catch (error) {

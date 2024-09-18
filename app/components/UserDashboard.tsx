@@ -42,6 +42,11 @@ const UserDashboard: React.FC = () => {
           : movie
       ));
 
+      setAssignedNights(prev => ({
+        ...prev,
+        [movieId]: [...(prev[movieId] || []), movieNights.find(night => night.id === movieNightId)!]
+      }));
+
       //alert('Movie assigned successfully!');
     } catch (error) {
       console.error('Error assigning movie:', error);
@@ -56,11 +61,16 @@ const UserDashboard: React.FC = () => {
       await removeMovieFromAllNights(movieId, movieNights);
 
       // Update local state
-      setMovies(movies.map(movie => 
+      setMovies(prevMovies => prevMovies.map(movie => 
         movie.id === movieId 
-          ? { ...movie, assignedTo: Object.fromEntries(Object.entries(movie.assignedTo).filter(([id]) => id !== movieNightId)) }
+          ? { ...movie, assignedTo: Object.fromEntries(Object.entries(movie.assignedTo || {}).filter(([id]) => id !== movieNightId)) }
           : movie
       ));
+
+      setAssignedNights(prev => ({
+        ...prev,
+        [movieId]: (prev[movieId] || []).filter(night => night.id !== movieNightId)
+      }));
 
       //alert('Movie removed successfully!');
     } catch (error) {
@@ -77,6 +87,11 @@ const UserDashboard: React.FC = () => {
 
       // Update local state
       setMovies(movies.filter(movie => movie.id !== movieId));
+      setAssignedNights(prev => {
+        const updated = { ...prev };
+        delete updated[movieId];
+        return updated;
+      });
 
       //alert('Movie removed successfully!');
     } catch (error) {

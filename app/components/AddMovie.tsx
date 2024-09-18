@@ -26,7 +26,7 @@ const AddMovie: React.FC<AddMovieProps> = ({ onMovieAdded }) => {
     }
 
     const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY;
-    const response = await fetch(`http://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&type=movie&apikey=${apiKey}`);
+    const response = await fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(searchTerm)}&type=movie&apikey=${apiKey}`);
     const data = await response.json();
 
     if (data.Response === 'True') {

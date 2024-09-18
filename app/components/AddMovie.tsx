@@ -45,7 +45,7 @@ const AddMovie: React.FC<AddMovieProps> = ({ onMovieAdded }) => {
     try {
       // Fetch additional details including plot
       const apiKey = process.env.NEXT_PUBLIC_OMDB_API_KEY;
-      const response = await fetch(`http://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`);
+      const response = await fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${apiKey}`);
       const fullMovieData = await response.json();
 
       const newMovieRef = await addDoc(collection(db, 'userMovies'), {

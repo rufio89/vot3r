@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { doc, updateDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../firebase/clientApp';
 import { MovieNight } from '../types/MovieTypes';
-import { formatDateTime, formatDateTimeForInput } from '../utils/dateUtils';
+import { formatDateTimeForInput } from '../utils/dateUtils';
 
 interface EditMovieNightProps {
   movieNight: MovieNight;

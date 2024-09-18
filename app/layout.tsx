@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Sidebar from "./components/Sidebar";
-import BottomNav from "./components/BottomNav";
+import ClientLayout from "./components/ClientLayout";
 import { AuthProvider } from './context/AuthContext';
 import { MovieNightProvider } from './context/MovieNightContext';
 
@@ -29,21 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <MovieNightProvider>
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-gray-50`}
-          >
-            <div className="flex flex-1 overflow-hidden">
-              <Sidebar className="hidden md:block" />
-              <main className="flex-1 overflow-auto p-4 md:p-8 pb-16 md:pb-8">
-                {children}
-              </main>
-            </div>
-            <BottomNav className="md:hidden" />
-          </body>
-        </MovieNightProvider>
-      </AuthProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
+        <AuthProvider>
+          <MovieNightProvider>
+            <ClientLayout>{children}</ClientLayout>
+          </MovieNightProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

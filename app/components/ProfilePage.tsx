@@ -1,15 +1,21 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../context/AuthContext';
 import { getUserProfile, updateUserProfile } from '../firebase/firebaseUtils';
 
 const ProfilePage: React.FC = () => {
-  const { user } = useAuth();
+  const router = useRouter();
+  const { user, logout } = useAuth();
   const [handle, setHandle] = useState('@');
   const [emoji, setEmoji] = useState('👤');
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (user) {
+    if (!user) {
+      router.push('/login');
+    } else {
+      const fetchUserProfile = async () => {
         const userProfile = await getUserProfile(user.uid);
         if (userProfile) {
           setHandle(userProfile.handle || '@');
@@ -20,10 +26,10 @@ const ProfilePage: React.FC = () => {
             emoji: '👤'
           });
         }
-      }
-    };
-    fetchUserProfile();
-  }, [user]);
+      };
+      fetchUserProfile();
+    }
+  }, [user, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +38,21 @@ const ProfilePage: React.FC = () => {
       alert('Profile updated successfully!');
     }
   };
+
+  const handleLogout = async () => {
+    if (logout) {
+      try {
+        await logout();
+        router.push('/login');
+      } catch (error) {
+        console.error('Logout failed:', error);
+      }
+    }
+  };
+
+  if (!user) {
+    return null; // or a loading spinner
+  }
 
   return (
     <div className="max-w-md mx-auto mt-8">
@@ -60,6 +81,9 @@ const ProfilePage: React.FC = () => {
         </div>
         <button type="submit" className="w-full p-2 bg-primary text-white rounded hover:bg-primary-dark transition duration-300">
           Update Profile
+        </button>
+        <button onClick={handleLogout} className="w-full mt-4 p-2 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300">
+          Logout
         </button>
       </form>
     </div>

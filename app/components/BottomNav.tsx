@@ -12,7 +12,7 @@ const BottomNav: React.FC<BottomNavProps> = ({ className }) => {
   const pathname = usePathname();
 
   return (
-    <nav className={className}>
+    <nav className={`fixed bottom-0 left-0 right-0 bg-background border-t border-secondary ${className}`}>
       <div className="flex justify-around">
         <Link href="/" className={`pt-2 pb-1 text-center ${pathname === '/' ? 'text-primary' : 'text-gray-500'}`}>
           <FaHome className="h-6 w-6 mb-1 mx-auto" />
